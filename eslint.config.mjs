@@ -11,6 +11,12 @@ export default defineConfig([
     // Turn on the full strict rule set on top of it.
     rules: {
       ...jsxA11y.flatConfigs.strict.rules,
+      // The WAI-ARIA date picker pattern puts role="grid" on a <table>: it is what switches
+      // screen readers into focus mode so arrow keys reach the calendar. Allow exactly that.
+      'jsx-a11y/no-noninteractive-element-to-interactive-role': [
+        'error',
+        { table: ['grid'], td: ['gridcell'] },
+      ],
     },
   },
   {

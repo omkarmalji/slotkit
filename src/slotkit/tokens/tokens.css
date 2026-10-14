@@ -87,9 +87,20 @@
   --sk-motion-popup-scale: calc(1 - 0.04 * var(--sk-motion-scale));
   --sk-motion-press-scale: calc(1 - 0.03 * var(--sk-motion-scale));
 
+  /* +1 in left-to-right text, -1 in right-to-left. Flips directional motion. */
+  --sk-inline-sign: 1;
+
   /* Layers: only used inside the isolated app root. Popups are portaled above it. */
   --sk-z-sticky: 10;
   --sk-z-overlay: 50;
+}
+
+[dir='rtl'] {
+  --sk-inline-sign: -1;
+}
+
+[dir='ltr'] {
+  --sk-inline-sign: 1;
 }
 
 @media (pointer: coarse) {

@@ -12,6 +12,14 @@ describe('findViolations', () => {
     expect(findViolations(`'w-[var(--sk-size-cell)]'`)).toEqual([]);
   });
 
+  it('allows transition property lists, which contain no values', () => {
+    expect(findViolations(`'transition-[opacity,scale] duration-base'`)).toEqual([]);
+    // A list that smuggles in a value is still an arbitrary value.
+    expect(findViolations(`'transition-[opacity_200ms]'`).map((v) => v.rule)).toContain(
+      'arbitrary Tailwind value',
+    );
+  });
+
   it('flags arbitrary Tailwind values', () => {
     expect(rules(`'p-[13px] bg-[#fff]'`)).toContain('arbitrary Tailwind value');
   });

@@ -9,10 +9,12 @@ const TAILWIND_PALETTE =
 
 const RULES: { name: string; pattern: RegExp }[] = [
   {
-    // `p-[13px]`, `bg-[#fff]`, `w-[calc(...)]`. Arbitrary *variants* such as
-    // `data-[side=top]:` end in a colon and are allowed. `var(--sk-*)` tokens are allowed.
+    // `p-[13px]`, `bg-[#fff]`, `w-[calc(...)]`. Allowed: arbitrary *variants* such as
+    // `data-[side=top]:` (they end in a colon), `var(--sk-*)` tokens, and transition
+    // property lists such as `transition-[opacity,scale]`, which name properties, not values.
     name: 'arbitrary Tailwind value',
-    pattern: /(?<![\w-])[a-z][\w-]*-\[(?!var\(--)[^\]\s]+\](?!:)/g,
+    pattern:
+      /(?<![\w-])(?!transition-\[[a-z-]+(?:,[a-z-]+)*\])[a-z][\w-]*-\[(?!var\(--)[^\]\s]+\](?!:)/g,
   },
   {
     name: 'default Tailwind palette color',

@@ -91,6 +91,28 @@
   --default-transition-duration: var(--sk-duration-fast);
   --default-transition-timing-function: var(--sk-ease-standard);
 
+  /*
+   * Month change: the new month slides in from the side you moved towards (inline-end for
+   * "next", so it flips in RTL) and fades in. Under reduced motion the distance is 0, so
+   * only the fade remains.
+   */
+  --animate-month-next: sk-month-in-next var(--sk-duration-base) var(--sk-ease-out);
+  --animate-month-prev: sk-month-in-prev var(--sk-duration-base) var(--sk-ease-out);
+
+  @keyframes sk-month-in-next {
+    from {
+      opacity: 0;
+      translate: calc(var(--sk-motion-distance-md) * var(--sk-inline-sign)) 0;
+    }
+  }
+
+  @keyframes sk-month-in-prev {
+    from {
+      opacity: 0;
+      translate: calc(var(--sk-motion-distance-md) * var(--sk-inline-sign) * -1) 0;
+    }
+  }
+
   /* Sizes */
   --container-measure: var(--sk-measure);
   --container-page: var(--sk-page-max);
