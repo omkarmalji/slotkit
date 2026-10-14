@@ -1,0 +1,241 @@
+/*
+ * slotkit design tokens.
+ *
+ * The only file in the library allowed to contain raw colors, lengths and durations.
+ * Everything else references these through `var(--sk-*)` or the Tailwind utilities
+ * mapped onto them in `theme.css`.
+ *
+ * Colors are OKLCH so lightness steps are perceptually even. `scripts/check-contrast.ts`
+ * reads this file and checks every declared foreground/background pair in both themes.
+ */
+
+/* ---------------------------------------------------------------------------
+ * Theme-independent tokens
+ * ------------------------------------------------------------------------- */
+:root {
+  /* Type */
+  --sk-font-sans:
+    var(--sk-font-sans-family, 'Instrument Sans'), ui-sans-serif, system-ui, sans-serif;
+  --sk-font-mono:
+    var(--sk-font-mono-family, 'Fragment Mono'), ui-monospace, 'SFMono-Regular', monospace;
+  --sk-font-size-2xs: 0.6875rem;
+  --sk-line-height-2xs: 1rem;
+  --sk-font-size-xs: 0.75rem;
+  --sk-line-height-xs: 1rem;
+  --sk-font-size-sm: 0.875rem;
+  --sk-line-height-sm: 1.25rem;
+  --sk-font-size-base: 1rem;
+  --sk-line-height-base: 1.5rem;
+  --sk-font-size-lg: 1.125rem;
+  --sk-line-height-lg: 1.625rem;
+  --sk-font-size-xl: 1.375rem;
+  --sk-line-height-xl: 1.875rem;
+  --sk-font-size-2xl: 1.75rem;
+  --sk-line-height-2xl: 2.125rem;
+  --sk-font-size-3xl: 2.375rem;
+  --sk-line-height-3xl: 2.625rem;
+  --sk-font-size-display: 3.5rem;
+  --sk-line-height-display: 3.5rem;
+  --sk-font-weight-regular: 400;
+  --sk-font-weight-medium: 500;
+  --sk-font-weight-semibold: 600;
+  --sk-tracking-tight: -0.02em;
+  --sk-tracking-display: -0.035em;
+  --sk-tracking-caps: 0.06em;
+
+  /* Space: a 4px base. Tailwind's `p-3` resolves to 3 x --sk-space-unit. */
+  --sk-space-unit: 0.25rem;
+
+  /* Radius: small and precise. */
+  --sk-radius-xs: 0.125rem;
+  --sk-radius-sm: 0.25rem;
+  --sk-radius-md: 0.5rem;
+  --sk-radius-lg: 0.75rem;
+  --sk-radius-full: 624.9375rem;
+
+  /* Borders */
+  --sk-border-width: 1px;
+  --sk-border-width-strong: 2px;
+
+  /* Focus ring: accent outline with a gap that shows the surface behind it. */
+  --sk-focus-ring-width: 2px;
+  --sk-focus-ring-offset: 2px;
+
+  /* Target sizes (WCAG 2.5.8: 24px minimum; 44px on coarse pointers). */
+  --sk-target-min: 1.5rem;
+  --sk-target: 2.25rem;
+
+  /* Layout */
+  --sk-measure: 68ch;
+  --sk-page-max: 75rem;
+  --sk-popup-max-width: 22.5rem;
+
+  /* Motion: short, purposeful. See MOTION.md. */
+  --sk-duration-instant: 80ms;
+  --sk-duration-fast: 140ms;
+  --sk-duration-base: 200ms;
+  --sk-duration-slow: 280ms;
+  --sk-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --sk-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --sk-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --sk-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Movement distances. Multiplied by --sk-motion-scale, which is 0 under reduced motion. */
+  --sk-motion-scale: 1;
+  --sk-motion-distance-sm: calc(0.25rem * var(--sk-motion-scale));
+  --sk-motion-distance-md: calc(0.75rem * var(--sk-motion-scale));
+  --sk-motion-popup-scale: calc(1 - 0.04 * var(--sk-motion-scale));
+  --sk-motion-press-scale: calc(1 - 0.03 * var(--sk-motion-scale));
+
+  /* Layers: only used inside the isolated app root. Popups are portaled above it. */
+  --sk-z-sticky: 10;
+  --sk-z-overlay: 50;
+}
+
+@media (pointer: coarse) {
+  :root {
+    --sk-target: 2.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Movement is removed; opacity changes stay, and get shorter. */
+    --sk-motion-scale: 0;
+    --sk-duration-base: 120ms;
+    --sk-duration-slow: 120ms;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Color: one token, two designed values.
+ *
+ * Every color is `light-dark(<light>, <dark>)`. The active `color-scheme` picks the
+ * value, so the OS preference works with JavaScript off, and the theme switcher only
+ * has to pin `color-scheme` via [data-theme]. No duplicated dark block to drift.
+ *
+ * Light: warm paper, warm ink, cobalt accent.
+ * Dark: designed, not inverted. A warm brown-black base; raised layers get lighter
+ * instead of casting shadows; text is a warm off-white, not pure white; cobalt is
+ * re-picked for a dark ground.
+ *
+ * The block is declared on `[data-theme]` as well as `:root` so that a nested themed
+ * region (for example a dark preview inside a light page) re-resolves light-dark()
+ * against its own color-scheme. Browsers resolve it where the property is declared.
+ * ------------------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+}
+
+:root,
+[data-theme] {
+  /* Surfaces, lowest to highest */
+  --sk-color-canvas: light-dark(oklch(96.8% 0.009 84deg), oklch(17.5% 0.009 62deg));
+  --sk-color-sunken: light-dark(oklch(94% 0.011 82deg), oklch(15% 0.008 62deg));
+  --sk-color-surface: light-dark(oklch(98.6% 0.005 84deg), oklch(21% 0.01 62deg));
+  --sk-color-raised: light-dark(oklch(99.4% 0.003 84deg), oklch(25% 0.011 62deg));
+
+  /* Text */
+  --sk-color-ink: light-dark(oklch(21% 0.012 60deg), oklch(92.5% 0.014 82deg));
+  --sk-color-ink-muted: light-dark(oklch(45% 0.014 62deg), oklch(74% 0.014 78deg));
+  --sk-color-ink-subtle: light-dark(oklch(58% 0.012 65deg), oklch(62% 0.012 74deg));
+  --sk-color-ink-inverse: light-dark(oklch(98.6% 0.005 84deg), oklch(17.5% 0.009 62deg));
+
+  /* Lines */
+  --sk-color-rule: light-dark(oklch(88.5% 0.01 80deg), oklch(31% 0.011 62deg));
+  --sk-color-rule-strong: light-dark(oklch(57% 0.012 68deg), oklch(58% 0.013 70deg));
+
+  /* Interaction */
+  --sk-color-hover: light-dark(oklch(92.6% 0.012 80deg), oklch(27% 0.012 62deg));
+  --sk-color-pressed: light-dark(oklch(89.5% 0.014 78deg), oklch(31% 0.013 62deg));
+  --sk-color-selected: light-dark(oklch(21% 0.012 60deg), oklch(92.5% 0.014 82deg));
+  --sk-color-selected-ink: light-dark(oklch(98.6% 0.005 84deg), oklch(17.5% 0.009 62deg));
+
+  /* Cobalt: focus, today, links. A separate value for each ground. */
+  --sk-color-accent: light-dark(oklch(47% 0.2 263deg), oklch(73% 0.13 260deg));
+  --sk-color-accent-hover: light-dark(oklch(41% 0.19 263deg), oklch(79% 0.11 260deg));
+  --sk-color-accent-ink: light-dark(oklch(98.6% 0.005 84deg), oklch(17.5% 0.009 62deg));
+  --sk-color-accent-subtle: light-dark(oklch(93.5% 0.035 263deg), oklch(29% 0.06 262deg));
+  --sk-color-focus: var(--sk-color-accent);
+
+  /* Status: always paired with an icon or text */
+  --sk-color-success: light-dark(oklch(45% 0.11 152deg), oklch(77% 0.12 152deg));
+  --sk-color-success-subtle: light-dark(oklch(94.5% 0.035 152deg), oklch(27% 0.04 152deg));
+  --sk-color-danger: light-dark(oklch(49% 0.18 27deg), oklch(74% 0.14 28deg));
+  --sk-color-danger-subtle: light-dark(oklch(94.5% 0.03 27deg), oklch(28% 0.05 28deg));
+  --sk-color-warning: light-dark(oklch(50% 0.11 70deg), oklch(81% 0.12 82deg));
+  --sk-color-warning-subtle: light-dark(oklch(95% 0.04 85deg), oklch(28% 0.04 82deg));
+
+  /* Unavailable dates and booked slots: hatched, not just faded */
+  --sk-color-unavailable: light-dark(oklch(54% 0.012 65deg), oklch(66% 0.012 74deg));
+  --sk-color-unavailable-hatch: light-dark(oklch(86% 0.01 80deg), oklch(31% 0.011 62deg));
+
+  /* Elevation colors. Paper casts soft warm shadows; dark uses outlines and a top highlight. */
+  --sk-color-shadow: light-dark(oklch(21% 0.012 60deg / 16%), oklch(0% 0 0deg / 55%));
+  --sk-color-shadow-soft: light-dark(oklch(21% 0.012 60deg / 6%), oklch(0% 0 0deg / 0%));
+  --sk-color-outline: light-dark(oklch(21% 0.012 60deg / 8%), oklch(36% 0.012 62deg));
+  --sk-color-highlight: light-dark(oklch(100% 0 0deg / 0%), oklch(100% 0 0deg / 5%));
+  --sk-color-backdrop: light-dark(oklch(21% 0.012 60deg / 32%), oklch(8% 0.006 62deg / 62%));
+  --sk-shadow-raised:
+    0 1px 2px var(--sk-color-shadow-soft), inset 0 1px 0 var(--sk-color-highlight);
+  --sk-shadow-popup:
+    0 0 0 1px var(--sk-color-outline), 0 12px 32px -8px var(--sk-color-shadow),
+    inset 0 1px 0 var(--sk-color-highlight);
+}
+
+/* The theme switcher pins the scheme. "system" leaves [data-theme] unset. */
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------------------
+ * Increased contrast: muted text becomes full ink, decorative rules become strong.
+ * ------------------------------------------------------------------------- */
+@media (prefers-contrast: more) {
+  :root {
+    --sk-color-ink-muted: var(--sk-color-ink);
+    --sk-color-ink-subtle: var(--sk-color-ink);
+    --sk-color-rule: var(--sk-color-rule-strong);
+    --sk-border-width: 2px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Forced colors (Windows High Contrast and similar): map tokens to system colors
+ * so states stay distinguishable when the user's palette replaces ours.
+ * ------------------------------------------------------------------------- */
+@media (forced-colors: active) {
+  :root {
+    --sk-color-canvas: Canvas;
+    --sk-color-sunken: Canvas;
+    --sk-color-surface: Canvas;
+    --sk-color-raised: Canvas;
+    --sk-color-ink: CanvasText;
+    --sk-color-ink-muted: CanvasText;
+    --sk-color-ink-subtle: GrayText;
+    --sk-color-ink-inverse: HighlightText;
+    --sk-color-rule: CanvasText;
+    --sk-color-rule-strong: CanvasText;
+    --sk-color-hover: Canvas;
+    --sk-color-pressed: Canvas;
+    --sk-color-selected: Highlight;
+    --sk-color-selected-ink: HighlightText;
+    --sk-color-accent: LinkText;
+    --sk-color-accent-hover: LinkText;
+    --sk-color-accent-ink: Canvas;
+    --sk-color-accent-subtle: Canvas;
+    --sk-color-focus: Highlight;
+    --sk-color-success: CanvasText;
+    --sk-color-danger: CanvasText;
+    --sk-color-warning: CanvasText;
+    --sk-color-unavailable: GrayText;
+    --sk-color-unavailable-hatch: GrayText;
+    --sk-color-outline: CanvasText;
+    --sk-shadow-raised: none;
+    --sk-shadow-popup: 0 0 0 1px CanvasText;
+  }
+}

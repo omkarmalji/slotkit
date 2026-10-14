@@ -1,4 +1,14 @@
-@import 'tailwindcss';
+/*
+ * Tailwind's default theme is deliberately not imported: only slotkit's
+ * token-backed theme exists. See src/slotkit/tokens/theme.css.
+ */
+@layer theme, base, components, utilities;
+
+@import 'tailwindcss/preflight.css' layer(base);
+@import 'tailwindcss/utilities.css' layer(utilities);
+@import '../slotkit/styles.css';
+
+@source '../';
 
 /* Required by Base UI: keep portaled popups above page content. */
 .root {

@@ -1,0 +1,59 @@
+/*
+ * Base element styles that every slotkit surface relies on.
+ */
+@layer base {
+  html {
+    background-color: var(--sk-color-canvas);
+    color: var(--sk-color-ink);
+    font-family: var(--sk-font-sans);
+    font-size: 100%;
+
+    /* Safari still needs the prefix. */
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100dvh;
+    font-size: var(--sk-font-size-base);
+    line-height: var(--sk-line-height-base);
+  }
+
+  /*
+   * One focus ring everywhere, only for keyboard focus. Components never remove it;
+   * they may only move it with outline-offset.
+   */
+  :focus-visible,
+  [data-preview~='focus-visible'] {
+    outline: var(--sk-focus-ring-width) solid var(--sk-color-focus);
+    outline-offset: var(--sk-focus-ring-offset);
+  }
+
+  ::selection {
+    background-color: var(--sk-color-accent-subtle);
+    color: var(--sk-color-ink);
+  }
+
+  @media (forced-colors: active) {
+    ::selection {
+      background-color: Highlight;
+      color: HighlightText;
+    }
+  }
+
+  /*
+   * Safety net for anything not built on motion tokens: with reduced motion on,
+   * nothing animates longer than an instant opacity change.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

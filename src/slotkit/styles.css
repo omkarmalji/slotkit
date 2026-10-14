@@ -1,0 +1,11 @@
+/*
+ * slotkit styles. Import after Tailwind's preflight and utilities layers:
+ *
+ *   @layer theme, base, components, utilities;
+ *   @import 'tailwindcss/preflight.css' layer(base);
+ *   @import 'tailwindcss/utilities.css' layer(utilities);
+ *   @import '<path>/slotkit/styles.css';
+ */
+@import './tokens/tokens.css';
+@import './tokens/theme.css';
+@import './tokens/base.css';

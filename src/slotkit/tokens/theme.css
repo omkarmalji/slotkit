@@ -1,0 +1,197 @@
+/*
+ * Tailwind v4 theme for slotkit.
+ *
+ * Tailwind's default theme is never imported (see globals.css), so the utilities that
+ * exist are exactly the ones mapped here, each backed by a slotkit token. `bg-blue-500`
+ * or `p-[13px]` simply do not exist, and `check-hardcoded` rejects the arbitrary ones.
+ *
+ * `inline` makes utilities reference `var(--sk-*)` directly, so light-dark() and
+ * reduced-motion overrides apply at use time.
+ */
+@theme inline {
+  /* Color */
+  --color-canvas: var(--sk-color-canvas);
+  --color-sunken: var(--sk-color-sunken);
+  --color-surface: var(--sk-color-surface);
+  --color-raised: var(--sk-color-raised);
+  --color-ink: var(--sk-color-ink);
+  --color-ink-muted: var(--sk-color-ink-muted);
+  --color-ink-subtle: var(--sk-color-ink-subtle);
+  --color-ink-inverse: var(--sk-color-ink-inverse);
+  --color-rule: var(--sk-color-rule);
+  --color-rule-strong: var(--sk-color-rule-strong);
+  --color-hover: var(--sk-color-hover);
+  --color-pressed: var(--sk-color-pressed);
+  --color-selected: var(--sk-color-selected);
+  --color-selected-ink: var(--sk-color-selected-ink);
+  --color-accent: var(--sk-color-accent);
+  --color-accent-hover: var(--sk-color-accent-hover);
+  --color-accent-ink: var(--sk-color-accent-ink);
+  --color-accent-subtle: var(--sk-color-accent-subtle);
+  --color-focus: var(--sk-color-focus);
+  --color-success: var(--sk-color-success);
+  --color-success-subtle: var(--sk-color-success-subtle);
+  --color-danger: var(--sk-color-danger);
+  --color-danger-subtle: var(--sk-color-danger-subtle);
+  --color-warning: var(--sk-color-warning);
+  --color-warning-subtle: var(--sk-color-warning-subtle);
+  --color-unavailable: var(--sk-color-unavailable);
+  --color-unavailable-hatch: var(--sk-color-unavailable-hatch);
+  --color-backdrop: var(--sk-color-backdrop);
+  --color-transparent: transparent;
+  --color-current: currentcolor;
+
+  /* Type */
+  --font-sans: var(--sk-font-sans);
+  --font-mono: var(--sk-font-mono);
+  --text-2xs: var(--sk-font-size-2xs);
+  --text-2xs--line-height: var(--sk-line-height-2xs);
+  --text-xs: var(--sk-font-size-xs);
+  --text-xs--line-height: var(--sk-line-height-xs);
+  --text-sm: var(--sk-font-size-sm);
+  --text-sm--line-height: var(--sk-line-height-sm);
+  --text-base: var(--sk-font-size-base);
+  --text-base--line-height: var(--sk-line-height-base);
+  --text-lg: var(--sk-font-size-lg);
+  --text-lg--line-height: var(--sk-line-height-lg);
+  --text-xl: var(--sk-font-size-xl);
+  --text-xl--line-height: var(--sk-line-height-xl);
+  --text-2xl: var(--sk-font-size-2xl);
+  --text-2xl--line-height: var(--sk-line-height-2xl);
+  --text-3xl: var(--sk-font-size-3xl);
+  --text-3xl--line-height: var(--sk-line-height-3xl);
+  --text-display: var(--sk-font-size-display);
+  --text-display--line-height: var(--sk-line-height-display);
+  --font-weight-regular: var(--sk-font-weight-regular);
+  --font-weight-medium: var(--sk-font-weight-medium);
+  --font-weight-semibold: var(--sk-font-weight-semibold);
+  --tracking-tight: var(--sk-tracking-tight);
+  --tracking-display: var(--sk-tracking-display);
+  --tracking-caps: var(--sk-tracking-caps);
+
+  /* Space: `p-3` = 3 x 4px */
+  --spacing: var(--sk-space-unit);
+
+  /* Radius */
+  --radius-xs: var(--sk-radius-xs);
+  --radius-sm: var(--sk-radius-sm);
+  --radius-md: var(--sk-radius-md);
+  --radius-lg: var(--sk-radius-lg);
+  --radius-full: var(--sk-radius-full);
+
+  /* Elevation */
+  --shadow-raised: var(--sk-shadow-raised);
+  --shadow-popup: var(--sk-shadow-popup);
+
+  /* Motion */
+  --ease-out: var(--sk-ease-out);
+  --ease-in: var(--sk-ease-in);
+  --ease-in-out: var(--sk-ease-in-out);
+  --ease-standard: var(--sk-ease-standard);
+  --default-transition-duration: var(--sk-duration-fast);
+  --default-transition-timing-function: var(--sk-ease-standard);
+
+  /* Sizes */
+  --container-measure: var(--sk-measure);
+  --container-page: var(--sk-page-max);
+  --container-popup: var(--sk-popup-max-width);
+}
+
+/*
+ * Breakpoints are used inside media queries, where var() is not allowed,
+ * so they are the one place literal lengths appear in the theme.
+ */
+@theme {
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+/* Motion durations: Tailwind has no theme namespace for these, so they are utilities. */
+@utility duration-instant {
+  transition-duration: var(--sk-duration-instant);
+}
+
+@utility duration-fast {
+  transition-duration: var(--sk-duration-fast);
+}
+
+@utility duration-base {
+  transition-duration: var(--sk-duration-base);
+}
+
+@utility duration-slow {
+  transition-duration: var(--sk-duration-slow);
+}
+
+/* Shared focus ring. Applied globally in base.css; also available as a utility. */
+@utility focus-ring {
+  outline: var(--sk-focus-ring-width) solid var(--sk-color-focus);
+  outline-offset: var(--sk-focus-ring-offset);
+}
+
+/* Target sizes */
+@utility target {
+  min-width: var(--sk-target);
+  min-height: var(--sk-target);
+}
+
+@utility target-min {
+  min-width: var(--sk-target-min);
+  min-height: var(--sk-target-min);
+}
+
+/* Numbers that line up in columns: dates, times, offsets. */
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hatched fill for unavailable dates and booked slots: a pattern, not only a color. */
+@utility hatched {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--sk-color-unavailable-hatch) 0 var(--sk-border-width),
+    transparent var(--sk-border-width) calc(var(--sk-space-unit) * 1.5)
+  );
+}
+
+/*
+ * State previews for docs states matrices.
+ *
+ * The built-in hover / active / focus-visible variants are redefined so that a
+ * `data-preview` attribute can force the same styles on a static example. Components
+ * keep writing ordinary `hover:` classes. `hover:` stays behind (hover: hover) so touch
+ * devices never get sticky hover states.
+ */
+@custom-variant hover {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+
+  &[data-preview~='hover'] {
+    @slot;
+  }
+}
+
+@custom-variant active {
+  &:active {
+    @slot;
+  }
+
+  &[data-preview~='active'] {
+    @slot;
+  }
+}
+
+@custom-variant focus-visible {
+  &:focus-visible {
+    @slot;
+  }
+
+  &[data-preview~='focus-visible'] {
+    @slot;
+  }
+}

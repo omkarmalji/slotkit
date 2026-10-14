@@ -74,7 +74,13 @@ const config = {
     {
       // Token files are where raw values live.
       files: ['src/slotkit/tokens/**/*.css'],
-      rules: { 'scale-unlimited/declaration-strict-value': null },
+      rules: {
+        'scale-unlimited/declaration-strict-value': null,
+        // Theme-independent and color tokens are kept in separate :root blocks on purpose.
+        'no-duplicate-selectors': null,
+        // Tailwind's @custom-variant bodies use `&` without an outer rule; Tailwind supplies it.
+        'nesting-selector-no-missing-scoping-root': null,
+      },
     },
   ],
 };
