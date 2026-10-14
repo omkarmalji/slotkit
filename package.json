@@ -1,0 +1,85 @@
+{
+  "name": "slotkit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Accessible scheduling components (date, time slot, timezone) built on Base UI.",
+  "license": "MIT",
+  "author": "Omkar Malji",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/omkarmalji/slotkit.git"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0 && stylelint \"src/**/*.css\"",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "check:hardcoded": "tsx scripts/check-hardcoded.ts",
+    "check:contrast": "tsx scripts/check-contrast.ts",
+    "verify": "npm run lint && npm run typecheck && npm run check:hardcoded && npm run check:contrast && npm run test && npm run build",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs}": [
+      "eslint --max-warnings=0 --fix",
+      "prettier --write"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{md,json,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@base-ui/react": "1.9.0",
+    "next": "16.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "9.39.5",
+    "@playwright/test": "1.64.0",
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.8",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "axe-core": "4.14.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.4.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "globals": "17.13.0",
+    "husky": "9.1.7",
+    "jsdom": "29.1.1",
+    "lint-staged": "17.6.0",
+    "postcss": "8.5.30",
+    "prettier": "3.9.10",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "stylelint": "17.16.0",
+    "stylelint-config-standard": "40.0.0",
+    "stylelint-declaration-strict-value": "1.12.1",
+    "tailwindcss": "4.3.3",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2",
+    "vitest": "5.0.4",
+    "vitest-axe": "0.1.0"
+  }
+}

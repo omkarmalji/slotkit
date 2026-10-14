@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+/* Required by Base UI: keep portaled popups above page content. */
+.root {
+  isolation: isolate;
+}
+
+/* Required by Base UI on iOS 26+ Safari so backdrops cover the visual viewport. */
+body {
+  position: relative;
+}
