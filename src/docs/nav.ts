@@ -12,7 +12,10 @@ export const NAV: NavGroup[] = [
   },
   {
     label: 'Components',
-    items: [{ href: '/components/date-picker', label: 'Calendar and DatePicker' }],
+    items: [
+      { href: '/components/date-picker', label: 'Calendar and DatePicker' },
+      { href: '/components/time-slot-list', label: 'TimeSlotList' },
+    ],
   },
 ];
 
