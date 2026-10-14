@@ -54,7 +54,7 @@ test('the theme choice persists across reloads and can be made with the keyboard
 });
 
 test('the skip link is the first tab stop and moves focus to the content', async ({ page }) => {
-  await page.goto('/foundations');
+  await page.goto('/components/foundations');
   await page.keyboard.press('Tab');
   const skip = page.getByRole('link', { name: 'Skip to content' });
   await expect(skip).toBeFocused();

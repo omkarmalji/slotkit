@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import { expectNoAxeViolations } from './axe';
 
-const PAGES = ['/', '/foundations'];
+const PAGES = ['/', '/components/foundations'];
 
 for (const colorScheme of ['light', 'dark'] as const) {
   test.describe(`${colorScheme} scheme`, () => {
@@ -20,7 +20,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
 test('an explicit dark choice also passes axe on a light OS', async ({ page }) => {
   await page.emulateMedia({ colorScheme: 'light' });
   await page.addInitScript(() => window.localStorage.setItem('slotkit-theme', 'dark'));
-  await page.goto('/foundations');
+  await page.goto('/components/foundations');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await expectNoAxeViolations(page);
 });

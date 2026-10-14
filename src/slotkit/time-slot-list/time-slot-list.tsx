@@ -84,7 +84,7 @@ export type TimeSlotListProps = {
  * explicit so a future hover transition does not creep in.
  */
 export const timeSlotClassName = cx(
-  'flex target flex-col items-center justify-center rounded-md border border-rule bg-surface px-2 py-2 text-sm text-ink tabular transition-none select-none',
+  'flex target flex-col items-center justify-center rounded-md border border-rule bg-surface px-1.5 py-2 text-sm whitespace-nowrap text-ink tabular transition-none select-none',
   'hover:border-rule-strong hover:bg-hover',
   'data-checked:border-selected data-checked:bg-selected data-checked:font-medium data-checked:text-selected-ink',
   'forced-colors:data-checked:forced-color-adjust-none',
