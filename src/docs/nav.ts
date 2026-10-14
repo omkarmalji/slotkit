@@ -10,6 +10,10 @@ export const NAV: NavGroup[] = [
       { href: '/foundations', label: 'Foundations' },
     ],
   },
+  {
+    label: 'Components',
+    items: [{ href: '/components/date-picker', label: 'Calendar and DatePicker' }],
+  },
 ];
 
 export const GITHUB_URL = 'https://github.com/omkarmalji/slotkit';

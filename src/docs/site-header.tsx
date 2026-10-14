@@ -21,6 +21,12 @@ export function SiteHeader() {
           >
             Foundations
           </Link>
+          <Link
+            href="/components/date-picker"
+            className="rounded-sm px-2 py-1 text-ink-muted hover:bg-hover hover:text-ink"
+          >
+            Components
+          </Link>
           <a
             href={GITHUB_URL}
             className="rounded-sm px-2 py-1 text-ink-muted hover:bg-hover hover:text-ink"

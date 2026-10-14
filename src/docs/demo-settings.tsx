@@ -1,5 +1,6 @@
 'use client';
 
+import { DirectionProvider } from '@base-ui/react/direction-provider';
 import { createContext, useContext, useId, useMemo, useState, type ReactNode } from 'react';
 import { ClockIcon, GlobeIcon } from '@/slotkit/icons/icons';
 
@@ -121,12 +122,14 @@ export function DemoToolbar() {
   );
 }
 
-/** Applies the demo locale's language and direction to its subtree. */
+/** Applies the demo locale's language and direction to its subtree, for markup and Base UI. */
 export function DemoLocaleScope({ children }: { children: ReactNode }) {
   const { locale, dir } = useDemoSettings();
   return (
-    <div lang={locale} dir={dir} className="w-full">
-      {children}
-    </div>
+    <DirectionProvider direction={dir}>
+      <div lang={locale} dir={dir} className="w-full">
+        {children}
+      </div>
+    </DirectionProvider>
   );
 }

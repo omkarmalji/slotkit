@@ -8,7 +8,7 @@ import { cx } from '@/slotkit/utils/cx';
  */
 
 export function DocPage({ children }: { children: ReactNode }) {
-  return <main className="mx-auto max-w-page px-4 pt-10 pb-24 sm:px-6 sm:pt-14">{children}</main>;
+  return <main className="mx-auto w-full max-w-page pt-10 pb-24 sm:pt-14">{children}</main>;
 }
 
 export function DocHeader({
@@ -237,5 +237,13 @@ export function Callout({
 export function Prose({ children }: { children: ReactNode }) {
   return (
     <div className="max-w-measure space-y-3 text-ink-muted [&_strong]:text-ink">{children}</div>
+  );
+}
+
+export function DemoNote({ children }: { children: ReactNode }) {
+  return (
+    <p aria-live="polite" className="text-xs text-ink-muted tabular">
+      {children}
+    </p>
   );
 }
