@@ -1,7 +1,11 @@
 # slotkit
 
 Accessible scheduling components (date, time slot, timezone) built on
-[Base UI](https://base-ui.com). Work in progress: see [PLAN.md](./PLAN.md) for the build order and
+[Base UI](https://base-ui.com).
+
+**Live docs and demos:** https://slotkit-dev.vercel.app
+
+Work in progress: see [PLAN.md](./PLAN.md) for the build order and
 [DECISIONS.md](./DECISIONS.md) for the reasoning behind each choice.
 
 ## Run locally
