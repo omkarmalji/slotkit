@@ -32,6 +32,11 @@ describe('findViolations', () => {
     ]);
   });
 
+  it('skips only the line after an explicit ignore pragma', () => {
+    const src = `// check-hardcoded-ignore-next-line\nconst a = '#fff';\nconst b = '#000';`;
+    expect(findViolations(src).map((v) => v.line)).toEqual([3]);
+  });
+
   it('ignores comments', () => {
     expect(findViolations(`// 12px gap, see #123\n/* bg-blue-500 */ const a = 1;`)).toEqual([]);
   });

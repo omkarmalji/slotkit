@@ -37,10 +37,16 @@ function stripComments(source: string): string {
     .replace(/(^|[^:])\/\/.*$/gm, (_m, prefix: string) => prefix);
 }
 
+const IGNORE_PRAGMA = 'check-hardcoded-ignore-next-line';
+
 export function findViolations(source: string): Violation[] {
+  const rawLines = source.split('\n');
   const lines = stripComments(source).split('\n');
   const violations: Violation[] = [];
   lines.forEach((text, index) => {
+    // An explicit, greppable escape hatch for values that cannot be tokens
+    // (for example <meta name="theme-color">, which cannot read CSS variables).
+    if (index > 0 && rawLines[index - 1]?.includes(IGNORE_PRAGMA)) return;
     for (const rule of RULES) {
       for (const m of text.matchAll(rule.pattern)) {
         violations.push({

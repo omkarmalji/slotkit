@@ -1,13 +1,14 @@
 /**
  * Fails when component code uses a raw color, length or duration instead of a design token.
- * Scans `src/slotkit/**` (the library), excluding tests and the token files themselves.
+ * Scans the library (`src/slotkit`) and the docs site (`src/app`, `src/docs`), excluding
+ * tests and the token files themselves.
  */
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { findViolations } from './hardcoded-rules';
 
 const ROOT = join(import.meta.dirname, '..');
-const LIBRARY = join(ROOT, 'src', 'slotkit');
+const SCANNED = ['slotkit', 'app', 'docs'].map((dir) => join(ROOT, 'src', dir));
 
 function walk(dir: string): string[] {
   return readdirSync(dir).flatMap((name) => {
@@ -17,7 +18,7 @@ function walk(dir: string): string[] {
   });
 }
 
-const files = walk(LIBRARY);
+const files = SCANNED.flatMap(walk);
 let count = 0;
 for (const file of files) {
   for (const v of findViolations(readFileSync(file, 'utf8'))) {
