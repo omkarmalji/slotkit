@@ -80,6 +80,19 @@ export function getLocaleHourCycle(locale: string): HourCycle {
   return resolved === 'h11' || resolved === 'h12' ? 'h12' : 'h23';
 }
 
+/**
+ * Options for a time of day. 24-hour times always get two-digit hours ("03:30"): ICU pads
+ * them for some locales and not others, and padded times line up in a column.
+ */
+export function timeOptions(timeZone: string, hourCycle?: HourCycle): Intl.DateTimeFormatOptions {
+  return {
+    timeZone,
+    hour: hourCycle === 'h23' ? '2-digit' : 'numeric',
+    minute: '2-digit',
+    ...(hourCycle ? { hourCycle } : {}),
+  };
+}
+
 /** A time of day at an instant, in a zone: "9:30 AM", "09:30", "٩:٣٠ ص". */
 export function formatTime(
   instant: Instant,
@@ -87,12 +100,7 @@ export function formatTime(
   timeZone: string,
   hourCycle?: HourCycle,
 ): string {
-  return getFormatter(locale, {
-    timeZone,
-    hour: 'numeric',
-    minute: '2-digit',
-    ...(hourCycle ? { hourCycle } : {}),
-  }).format(instant);
+  return getFormatter(locale, timeOptions(timeZone, hourCycle)).format(instant);
 }
 
 /** The zone's localized generic name: "Eastern Time", "India Standard Time". */
