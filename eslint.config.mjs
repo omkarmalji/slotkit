@@ -25,6 +25,7 @@ export default defineConfig([
     rules: { 'no-console': 'off' },
   },
   globalIgnores([
+    '.scratch/**',
     '.next/**',
     'node_modules/**',
     'coverage/**',
