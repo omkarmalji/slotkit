@@ -13,10 +13,10 @@ import {
 } from '@/docs/doc-parts';
 import { MoonIcon } from '@/slotkit/icons/icons';
 import {
-  themeGroupClassName,
-  themeOptionClassName,
-  ThemeSwitcher,
-} from '@/slotkit/theme/theme-switcher';
+  segmentClassName,
+  segmentedGroupClassName,
+} from '@/slotkit/segmented-control/segmented-control';
+import { ThemeSwitcher } from '@/slotkit/theme/theme-switcher';
 
 function Option({
   checked = false,
@@ -31,10 +31,10 @@ function Option({
     <RadioGroup
       value={checked ? 'dark' : 'light'}
       disabled={disabled}
-      className={themeGroupClassName}
+      className={segmentedGroupClassName}
       aria-label="Preview"
     >
-      <Radio.Root value="dark" className={themeOptionClassName} data-preview={preview}>
+      <Radio.Root value="dark" className={segmentClassName} data-preview={preview}>
         <MoonIcon />
         <span>Dark</span>
       </Radio.Root>
