@@ -231,7 +231,7 @@ export function useCalendarGrid(options: UseCalendarGridOptions) {
 
       pendingFocus.current = true;
       setFocusedState(action.date);
-      // Holding PageDown must not queue a slide per month (see MOTION.md).
+      // Holding PageDown must not queue a slide per month.
       changeMonth(action.date, { animate: !event.repeat });
       setAnnouncement('');
     },

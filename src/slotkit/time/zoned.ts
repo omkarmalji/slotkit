@@ -9,7 +9,7 @@ import { type CalendarDate, fromEpochDay, toEpochDay } from './calendar-date';
  * The one thing Intl cannot do is turn a wall-clock time ("09:00 on 8 March in New York")
  * back into an instant. `zonedToInstant` does that by asking Intl for the offsets around
  * that wall time, trying each one, and keeping only the candidates that Intl confirms
- * format back to the same wall time. See DECISIONS.md, "Time correctness".
+ * format back to the same wall time.
  */
 
 /** Milliseconds since the Unix epoch: an exact point in time, independent of zone. */

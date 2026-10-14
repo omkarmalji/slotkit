@@ -70,7 +70,7 @@
   --sk-page-max: 75rem;
   --sk-popup-max-width: 22.5rem;
 
-  /* Motion: short, purposeful. See MOTION.md. */
+  /* Motion: short, purposeful. */
   --sk-duration-instant: 80ms;
   --sk-duration-fast: 140ms;
   --sk-duration-base: 200ms;

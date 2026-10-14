@@ -229,7 +229,7 @@ export default function FoundationsPage() {
         <DocSection
           id="motion"
           title="Motion"
-          description="Short and purposeful. Movement drops to zero under reduced motion; only opacity remains. Full principles in MOTION.md."
+          description="Short and purposeful. Movement drops to zero under reduced motion; only opacity remains."
         >
           <ul className="divide-y divide-rule rounded-lg border border-rule bg-surface text-sm">
             {MOTION.map((m) => (

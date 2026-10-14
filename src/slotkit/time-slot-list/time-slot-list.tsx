@@ -79,7 +79,7 @@ export type TimeSlotListProps = {
 } & Omit<ComponentPropsWithRef<'div'>, 'className' | 'defaultValue' | 'onChange'>;
 
 /**
- * Deliberately no motion (see MOTION.md): this list is scanned by holding arrow keys and by
+ * Deliberately no motion: this list is scanned by holding arrow keys and by
  * typing, so any per-item transition would run on every key repeat. `transition-none` is
  * explicit so a future hover transition does not creep in.
  */
